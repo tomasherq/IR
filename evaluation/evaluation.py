@@ -1,19 +1,18 @@
 """
 This module computes evaluation metrics for MSMARCO dataset on the ranking task.
 Command line:
-python msmarco_eval_ranking.py <path_to_reference_file> <path_to_candidate_file>
+python msmarco_eval_ranking.py <path_reference_file> <path_to_candidate_file>
 
 Creation Date : 06/12/2018
 Last Modified : 1/21/2019
 Authors : Daniel Campos <dacamp@microsoft.com>, Rutger van Haasteren <ruvanh@microsoft.com>
 """
-import re
 import sys
-import statistics
 
-from collections import Counter, defaultdict
-
-MaxMRRRank = 10
+from collections import defaultdict
+from tools.mrr import compute_mrr
+from tools.mp import compute_mp
+from tools.map import compute_map, compute_gmap
 
 
 def load_file(path_to_file, candidate):
@@ -52,31 +51,15 @@ def load_file(path_to_file, candidate):
     return information_passages
 
 
-def load_reference(path_to_reference):
-    '''Load the info about the reference file
-
-    Args:
-        path_to_reference (String): path to the reference file
-
-    Returns:
-        dictionary: Contains all the important info about the references
-    '''
-    return load_file(path_to_reference, False)
+def load_reference(path):
+    return load_file(path, False)
 
 
-def load_candidate(path_to_candidate):
-    '''Load the info about the candidate file (run)
-
-    Args:
-        path_to_candidate (String): path to the candidate file
-
-    Returns:
-        dictionary: Contains all the important info about the candidate
-    '''
-    return load_file(path_to_candidate, True)
+def load_candidate(path):
+    return load_file(path, True)
 
 
-def quality_checks_qids(qids_to_relevant_passageids, qids_to_ranked_candidate_passages):
+def quality_checks_qids(qids_candidate):
     """Perform quality checks on the dictionaries
 
     Args:
@@ -89,8 +72,8 @@ def quality_checks_qids(qids_to_relevant_passageids, qids_to_ranked_candidate_pa
     message = ''
 
     # Check that we do not have multiple passages per query
-    for qid, values in qids_to_ranked_candidate_passages.items():
-        # Remove all zeros from the candidates
+    for qid, values in qids_candidate.items():
+
         values_dict = list(values.values())
         unique = list(set(values_dict))
 
@@ -103,43 +86,10 @@ def quality_checks_qids(qids_to_relevant_passageids, qids_to_ranked_candidate_pa
     return message
 
 
-def compute_metrics(qids_to_relevant_passageids, qids_to_ranked_candidate_passages):
+def compute_metrics_from_files(path_reference, path_candidate, perform_checks=True):
     """Compute MRR metric
     Args:    
-    p_qids_to_relevant_passageids (dict): dictionary of query-passage mapping
-        Dict as read in with load_reference or load_reference_from_stream
-    p_qids_to_ranked_candidate_passages (dict): dictionary of query-passage candidates
-    Returns:
-        dict: dictionary of metrics {'MRR': <MRR Score>}
-    """
-    all_scores = {}
-    MRR = 0
-    qids_with_relevant_passages = 0
-    ranking = []
-    for qid in qids_to_ranked_candidate_passages:
-        if qid in qids_to_relevant_passageids:
-            ranking.append(0)
-            target_pid = qids_to_relevant_passageids[qid]
-            candidate_pid = qids_to_ranked_candidate_passages[qid]
-            for i in range(0, MaxMRRRank):
-                if candidate_pid[i] in target_pid:
-                    MRR += 1/(i + 1)
-                    ranking.pop()
-                    ranking.append(i+1)
-                    break
-    if len(ranking) == 0:
-        raise IOError("No matching QIDs found. Are you sure you are scoring the evaluation set?")
-
-    MRR = MRR/len(qids_to_relevant_passageids)
-    all_scores['MRR @10'] = MRR
-    all_scores['QueriesRanked'] = len(qids_to_ranked_candidate_passages)
-    return all_scores
-
-
-def compute_metrics_from_files(path_to_reference, path_to_candidate, perform_checks=True):
-    """Compute MRR metric
-    Args:    
-    p_path_to_reference_file (str): path to reference file.
+    p_path_reference_file (str): path to reference file.
         Reference file should contain lines in the following format:
             QUERYID\tPASSAGEID
             Where PASSAGEID is a relevant passage for a query. Note QUERYID can repeat on different lines with different PASSAGEIDs
@@ -153,25 +103,31 @@ def compute_metrics_from_files(path_to_reference, path_to_candidate, perform_che
         dict: dictionary of metrics {'MRR': <MRR Score>}
     """
 
-    qids_to_relevant_passageids = load_reference(path_to_reference)
-    qids_to_ranked_candidate_passages = load_candidate(path_to_candidate)
+    qids_relevant = load_reference(path_reference)
+    qids_candidate = load_candidate(path_candidate)
     if perform_checks:
-        message = quality_checks_qids(qids_to_relevant_passageids, qids_to_ranked_candidate_passages)
+        message = quality_checks_qids(qids_candidate)
         if message != '':
             print(message)
 
-    return compute_metrics(qids_to_relevant_passageids, qids_to_ranked_candidate_passages)
+    all_scores = compute_mrr(qids_relevant, qids_candidate)
+    all_scores = compute_mp(qids_relevant, qids_candidate, all_scores)
+    all_scores = compute_map(qids_relevant, qids_candidate, all_scores)
+    all_scores = compute_gmap(qids_relevant, qids_candidate, all_scores)
+    all_scores['QueriesRanked'] = len(qids_candidate)
+
+    return all_scores
 
 
 def main():
     """Command line:
-    python msmarco_eval_ranking.py <path_to_reference_file> <path_to_candidate_file>
+    python msmarco_eval_ranking.py <path_reference_file> <path_to_candidate_file>
     """
 
     if len(sys.argv) == 3:
-        path_to_reference = sys.argv[1]
-        path_to_candidate = sys.argv[2]
-        metrics = compute_metrics_from_files(path_to_reference, path_to_candidate)
+        path_reference = sys.argv[1]
+        path_candidate = sys.argv[2]
+        metrics = compute_metrics_from_files(path_reference, path_candidate)
         print('#####################')
         for metric in sorted(metrics):
             print('{}: {}'.format(metric, metrics[metric]))
