@@ -8,7 +8,7 @@ K = 10
 
 INDEX = "../indexes/lucene-index-msmarco-passage"
 OUTPUT = f"../runs/run_prob_passage_{len(os.listdir('../runs'))}.txt"
-TOPICS = "../tools/topics-and-qrels/topics.msmarco-passage.dev-subset.txt"
+TOPICS = "../queries/queries.dev.small.tsv"
 
 
 def readQueryFile(filename):

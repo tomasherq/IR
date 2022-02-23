@@ -23,5 +23,5 @@ Once this is done, you can use the probabilistic\_model.py that is in the repo.
 To evaluate the results you have to use this for now:
 
 ```bash
-python tools/scripts/msmarco/msmarco_passage_eval.py    tools/topics-and-qrels/qrels.msmarco-passage.dev-subset.txt runs/run_prob_passage.txt
+python tools/scripts/msmarco/msmarco_passage_eval.py  queries/qrels.dev.small.tsv
 ```
