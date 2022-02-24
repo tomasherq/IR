@@ -7,8 +7,8 @@ B = float(0.68)
 K = 10
 
 INDEX = "../indexes/lucene-index-msmarco-passage"
-OUTPUT = f"../runs/run_prob_passage_{len(os.listdir('../runs'))}.txt"
-TOPICS = "../queries/queries.dev.small.tsv"
+OUTPUT = f"../runs/run_prob_passage_{len(os.listdir('../runs'))}_train.txt"
+TOPICS = "../queries/queries.train.tsv"
 
 
 def readQueryFile(filename):

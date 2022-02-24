@@ -1,0 +1,13 @@
+mkdir collections/queries
+
+python tools/scripts/msmarco/convert_queries.py \
+  --input queries/queries.eval.small.tsv \
+  --output collections/queries/queries.eval.small.json 
+
+python tools/scripts/msmarco/convert_queries.py \
+  --input queries/queries.dev.small.tsv \
+  --output collections/queries/queries.dev.small.json
+
+python tools/scripts/msmarco/convert_queries.py \
+  --input queries/queries.train.tsv \
+  --output collections/queries/queries.train.json

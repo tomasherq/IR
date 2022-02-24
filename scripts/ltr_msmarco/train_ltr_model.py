@@ -35,10 +35,10 @@ import time
 
 import sys
 
-sys.path.append('..')
 
-DIRECTION_QRELS = "../../queries/qrels.dev.small.tsv"
-DIRECTION_RUN = "../../runs/run_prob_passage_3.txt"
+DIRECTION_QRELS = "/home/tomas/Escritorio/IR/project/IR/queries/qrels.dev.small.tsv"
+DIRECTION_RUN = "/home/tomas/Escritorio/IR/project/IR/runs/run_prob_passage_3.txt"
+DIRECTION_SAVE = "/home/tomas/Escritorio/IR/project/IR/collections/models"
 
 """
 train a LTR model with lambdaRank library and save to pickle for future inference
@@ -113,7 +113,7 @@ def train_data_loader(task='triple', neg_sample=20, random_seed=12345):
             print(sampled_train.info())
 
             sampled_train.to_pickle(
-                f'./collections/msmarco-ltr-passage/train_{task}_sampled_with_{neg_sample}_{random_seed}.pickle')
+                f'{DIRECTION_SAVE}/train_{task}_sampled_with_{neg_sample}_{random_seed}.pickle')
         else:
             raise Exception('unknown parameters')
         return sampled_train
@@ -142,7 +142,7 @@ def dev_data_loader(task='anserini'):
                               names=['qid', 'pid', 'rank'], dtype=np.int32)
         else:
             raise Exception('unknown parameters')
-        dev_qrel = pd.read_csv('./collections/msmarco-passage/qrels.dev.small.tsv', sep="\t",
+        dev_qrel = pd.read_csv(DIRECTION_QRELS, sep="\t",
                                names=["qid", "q0", "pid", "rel"], usecols=['qid', 'pid', 'rel'], dtype=np.int32)
         dev = dev.merge(dev_qrel, left_on=['qid', 'pid'], right_on=['qid', 'pid'], how='left')
         dev['rel'] = dev['rel'].fillna(0).astype(np.int32)
