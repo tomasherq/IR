@@ -1,14 +1,7 @@
 
 
 def compute_mrr(qids_relevant, qids_candidate, all_scores={}):
-    """Compute MRR metric
-    Args:    
-    p_qids_to_relevant_passageids (dict): dictionary of query-passage mapping
-        Dict as read in with load_reference or load_reference_from_stream
-    p_qids_to_ranked_candidate_passages (dict): dictionary of query-passage candidates
-    Returns:
-        dict: dictionary of metrics {'MRR': <MRR Score>}
-    """
+
     MRR = 0
     MAX_MRR = len(list(qids_candidate.values())[0])
 

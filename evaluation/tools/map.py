@@ -54,7 +54,7 @@ def compute_gmap(qids_relevant, qids_candidate, all_scores={}):
 
                     ap += math.log(found/rank, e)
 
-            map += ap
+            map += ap/total_documents
 
     gmap = e**((1/MAX)*map)
 

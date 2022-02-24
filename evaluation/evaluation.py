@@ -13,6 +13,7 @@ from collections import defaultdict
 from tools.mrr import compute_mrr
 from tools.mp import compute_mp
 from tools.map import compute_map, compute_gmap
+from tools.recall import compute_recall
 
 
 def load_file(path_to_file, candidate):
@@ -114,6 +115,7 @@ def compute_metrics_from_files(path_reference, path_candidate, perform_checks=Tr
     all_scores = compute_mp(qids_relevant, qids_candidate, all_scores)
     all_scores = compute_map(qids_relevant, qids_candidate, all_scores)
     all_scores = compute_gmap(qids_relevant, qids_candidate, all_scores)
+    all_scores = compute_recall(qids_relevant, qids_candidate, all_scores)
     all_scores['QueriesRanked'] = len(qids_candidate)
 
     return all_scores

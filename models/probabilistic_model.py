@@ -1,7 +1,7 @@
 from pyserini.search import SimpleSearcher
 import os
 
-
+# Use optimal from pyserini github and add extensions! from pyserini
 K1 = float(0.82)
 B = float(0.68)
 K = 10
