@@ -4,11 +4,11 @@ import os
 # Use optimal from pyserini github and add extensions! from pyserini
 K1 = float(0.82)
 B = float(0.68)
-K = 10
+K = 1000
 
 INDEX = "../indexes/lucene-index-msmarco-passage"
 OUTPUT = f"../runs/run_prob_passage_{len(os.listdir('../runs'))}_train.txt"
-TOPICS = "../queries/queries.train.tsv"
+TOPICS = "../queries/msmarco-test2019-queries.tsv"
 
 
 def readQueryFile(filename):
