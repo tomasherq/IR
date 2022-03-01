@@ -5,12 +5,12 @@ from collections import defaultdict
 params = ['map', 'ndcg', 'recip_rank']
 docs_ids = []
 
-with open("../run_8_eval_general.json", "r") as file_read:
+with open("../run_9_eval_general.json", "r") as file_read:
     averages = json.load(file_read)
 
 QUERIES_FILE = "/home/tomas/Escritorio/IR/project/IR/queries/msmarco-test2019-queries.tsv"
 
-with open("../run_8_eval_per_query.json", "r") as file_read:
+with open("../run_9_eval_per_query.json", "r") as file_read:
     data_per_query = json.load(file_read)
 
     for param in params:

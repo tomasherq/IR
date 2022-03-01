@@ -9,7 +9,7 @@ TOPICS_FILE = "/home/tomas/Escritorio/IR/project/IR/queries/msmarco-test2019-que
 QRELS_FILE = "/home/tomas/Escritorio/IR/project/IR/queries/2019qrels-pass.txt"
 OUTPUT_EVAL = f"../evals/run_{len(os.listdir('../runs'))}_eval_per_query.json"
 OUTPUT_EVAL_GENERAL = f"../evals/run_{len(os.listdir('../runs'))}_eval_general.json"
-pt.init()
+pt.init(boot_packages=["com.github.terrierteam:terrier-prf:-SNAPSHOT"])
 
 topics = pt.io.read_topics(TOPICS_FILE, format="singleline")
 
