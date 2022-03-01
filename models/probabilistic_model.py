@@ -1,7 +1,7 @@
 import pyterrier as pt
 import os
 import json
-from models.common import *
+from common import *
 
 # Use optimal from pyserini github and add extensions! from pyserini
 K1 = float(0.82)
