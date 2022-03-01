@@ -9,6 +9,6 @@ rf = RandomForestRegressor(n_estimators=400)
 rf_pipe = pipeline >> pt.ltr.apply_learned_model(rf)
 rf_pipe.fit(topics, qrels)
 
-results = pt.Experiment([bm25, rf_pipe], topics, qrels, ["map"], names=["BM25 Baseline", "LTR"])
+results = pt.Experiment([bm25, rf_pipe], topics, qrels, ['map', "ndcg", "recip_rank"], names=["BM25 Baseline", "LTR"])
 
 print(results)
