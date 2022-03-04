@@ -5,7 +5,7 @@ pt.init()
 
 
 def msmarco_generate():
-    with open("/home/tomas/Escritorio/IR/project/code/collectionandqueries/collection/collection.tsv", "r") as file_read:
+    with open("C:/Users/Computer/IR_Project/collectionandqueries/collection.tsv", "r", encoding='utf-8') as file_read:
         for line in file_read:
 
             if line:
@@ -15,7 +15,7 @@ def msmarco_generate():
                 yield {'docno': docno.strip(), 'text': passage.strip()}
 
 
-iter_indexer = pt.IterDictIndexer("./passage_index")
+iter_indexer = pt.IterDictIndexer("C:/Users/Computer/IR_Project/createdIndex/passage_index")
 indexref3 = iter_indexer.index(msmarco_generate())
 
 # # list of filenames to index
