@@ -5,10 +5,14 @@ import json
 
 INDEX = "/home/tomas/Escritorio/IR/project/IR/createIndex/passage_index"
 OUTPUT = f"../runs/run_{len(os.listdir('../runs'))}.txt"
-TOPICS_FILE = "/home/tomas/Escritorio/IR/project/IR/queries/msmarco-test2019-queries.tsv"
-QRELS_FILE = "/home/tomas/Escritorio/IR/project/IR/queries/2019qrels-pass.txt"
-OUTPUT_EVAL = f"../evals/run_{len(os.listdir('../runs'))}_eval_per_query.json"
-OUTPUT_EVAL_GENERAL = f"../evals/run_{len(os.listdir('../runs'))}_eval_general.json"
+# TOPICS_FILE = "/home/tomas/Escritorio/IR/project/IR/queries/msmarco-test2019-queries.tsv"
+TOPICS_FILE = "/home/tomas/Escritorio/IR/project/IR/queries/queries.dev.tsv"
+
+# QRELS_FILE = "/home/tomas/Escritorio/IR/project/IR/queries/2019qrels-pass.txt"
+QRELS_FILE = "/home/tomas/Escritorio/IR/project/IR/queries/qrels.dev.tsv"
+
+OUTPUT_EVAL = f"../evals/run_{len(os.listdir('../runs'))}_eval_per_query_dev.json"
+OUTPUT_EVAL_GENERAL = f"../evals/run_{len(os.listdir('../runs'))}_eval_general_dev.json"
 pt.init(boot_packages=["com.github.terrierteam:terrier-prf:-SNAPSHOT"])
 
 topics = pt.io.read_topics(TOPICS_FILE, format="singleline")

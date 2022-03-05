@@ -26,17 +26,24 @@ def get_values_keys(parameter, stat):
 
 def plot_values(stat, counter_plots=1, color="blue"):
 
+    first = True
+
     for parameter in values_tune:
         plt.subplot(3, 3, counter_plots)
-        plt
+
         keys, means = get_values_keys(parameter, stat)
         plt.plot(keys, means, marker="o", color=color)
         plt.xticks(keys)
 
         diff = max(means)-min(means)
 
-        plt.xlabel(stat.upper())
-        plt.ylabel(f'{parameter} value')
+        if first:
+            plt.ylabel(stat.upper())
+            first = False
+
+        if(counter_plots < 4):
+            plt.title(f'{parameter} value')
+
         counter_plots += 1
 
     return counter_plots
@@ -54,26 +61,31 @@ for result in results:
 
     values_tune["c"][c]["map"].append(map_value)
     values_tune["c"][c]["ndcg"].append(ndcg_value)
-    values_tune["c"][c]["rr"].append(rr_value)
+    values_tune["c"][c]["mrr"].append(rr_value)
 
     values_tune["k1"][k1]["map"].append(map_value)
     values_tune["k1"][k1]["ndcg"].append(ndcg_value)
-    values_tune["k1"][k1]["rr"].append(rr_value)
+    values_tune["k1"][k1]["mrr"].append(rr_value)
 
     values_tune["k2"][k3]["map"].append(map_value)
     values_tune["k2"][k3]["ndcg"].append(ndcg_value)
-    values_tune["k2"][k3]["rr"].append(rr_value)
+    values_tune["k2"][k3]["mrr"].append(rr_value)
 
 
 # Plots for MAP
 
+
+plt.rc('axes', labelsize=22)  # fontsize of the x and y labels
+plt.rc('axes', titlesize=22)  # fontsize of the title
+plt.rc('xtick', labelsize=12)  # fontsize of the x tick labels
+plt.rc('ytick', labelsize=12)  # fontsize of the y tick labels
 plot_counter = plot_values("map", 1)
 
 
 # Plots for ndcg
 plot_counter = plot_values("ndcg", 4, "orange")
 
-plot_values("rr", plot_counter, "green")
+plot_values("mrr", plot_counter, "green")
 
 
 plt.show()
