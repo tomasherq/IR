@@ -1,0 +1,78 @@
+Stats for queries
+Average length: 
+All: 32.84
+Worst: 32.62
+Average stop-words: 
+All : 0.47
+Worst : 0.46
+
+Stats for passages
+Average length: 
+All: 318.12
+Worst: 330.31
+Average stop-words: 
+All : 0.47
+Worst : 0.52
+
+Worst queries
+For the query 1121709 the word that appears the least is percenters? and it appears 0 times
+For the query 1106007 the word that appears the least is define and it appears 0 times
+For the query 443396 the word that appears the least is lps and it appears 0 times
+For the query 1063750 the word that appears the least is volunterilay and it appears 0 times
+For the query 962179 the word that appears the least is salvation and it appears 0 times
+For the query 489204 the word that appears the least is pelvic and it appears 0 times
+For the query 1110199 the word that appears the least is wifi and it appears 0 times
+For the query 451602 the word that appears the least is medicare's and it appears 0 times
+For the query 1112341 the word that appears the least is daily and it appears 0 times
+For the query 527433 the word that appears the least is types and it appears 0 times
+For the query 87452 the word that appears the least is military and it appears 0 times
+For the query 1113437 the word that appears the least is physical and it appears 0 times
+For the query 19335 the word that appears the least is anthropological and it appears 0 times
+For the query 1115776 the word that appears the least is aml and it appears 0 times
+For the query 148538 the word that appears the least is difference and it appears 0 times
+For the query 833860 the word that appears the least is popular and it appears 0 times
+
+All passages
+For the query 1121709 the word that appears the least is  and it appears 0 times
+For the query 1106007 the word that appears the least is  and it appears 0 times
+For the query 443396 the word that appears the least is  and it appears 0 times
+For the query 1063750 the word that appears the least is  and it appears 0 times
+For the query 962179 the word that appears the least is  and it appears 0 times
+For the query 489204 the word that appears the least is  and it appears 0 times
+For the query 1110199 the word that appears the least is  and it appears 0 times
+For the query 451602 the word that appears the least is  and it appears 0 times
+For the query 1112341 the word that appears the least is  and it appears 0 times
+For the query 527433 the word that appears the least is  and it appears 0 times
+For the query 87452 the word that appears the least is  and it appears 0 times
+For the query 1113437 the word that appears the least is  and it appears 0 times
+For the query 19335 the word that appears the least is  and it appears 0 times
+For the query 1115776 the word that appears the least is  and it appears 0 times
+For the query 148538 the word that appears the least is  and it appears 0 times
+For the query 833860 the word that appears the least is  and it appears 0 times
+For the query 915593 the word that appears the least is  and it appears 0 times
+For the query 207786 the word that appears the least is  and it appears 0 times
+For the query 1037798 the word that appears the least is  and it appears 0 times
+For the query 47923 the word that appears the least is  and it appears 0 times
+For the query 104861 the word that appears the least is  and it appears 0 times
+For the query 131843 the word that appears the least is  and it appears 0 times
+For the query 490595 the word that appears the least is  and it appears 0 times
+For the query 405717 the word that appears the least is  and it appears 0 times
+For the query 264014 the word that appears the least is  and it appears 0 times
+For the query 359349 the word that appears the least is  and it appears 0 times
+For the query 1117099 the word that appears the least is  and it appears 0 times
+For the query 573724 the word that appears the least is  and it appears 0 times
+For the query 1114646 the word that appears the least is  and it appears 0 times
+For the query 1133167 the word that appears the least is  and it appears 0 times
+For the query 1129237 the word that appears the least is  and it appears 0 times
+For the query 146187 the word that appears the least is  and it appears 0 times
+For the query 183378 the word that appears the least is  and it appears 0 times
+For the query 87181 the word that appears the least is  and it appears 0 times
+For the query 1103812 the word that appears the least is  and it appears 0 times
+For the query 1114819 the word that appears the least is  and it appears 0 times
+For the query 168216 the word that appears the least is  and it appears 0 times
+For the query 1121402 the word that appears the least is  and it appears 0 times
+For the query 156493 the word that appears the least is  and it appears 0 times
+For the query 182539 the word that appears the least is  and it appears 0 times
+For the query 855410 the word that appears the least is  and it appears 0 times
+For the query 130510 the word that appears the least is  and it appears 0 times
+For the query 1124210 the word that appears the least is  and it appears 0 times
