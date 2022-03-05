@@ -50,7 +50,7 @@ with open("worst_queries.json", "w") as file_write, open("worst_passages.json", 
         worst_queries.append((querid, content_file.split(querid)[1].split("\n")[0].strip()))
 
     for querid in all_queries_ids:
-        all_passages.append((querid, content_file.split(querid)[1].split("\n")[0].strip()))
+        all_passages.append((querid, content_passage.split(querid)[1].split("\n")[0].strip()))
 
     file_write.write(json.dumps(worst_queries, indent=4))
     file_write_pass.write(json.dumps(worst_passages, indent=4))

@@ -39,7 +39,7 @@ def get_avg_stop(queries):
     counter_tot = 0
 
     for query in queries:
-        words = query.split(" ")
+        words = query[1].split(" ")
         for word in words:
             if word in stop_words:
                 counter_stop += 1
@@ -67,26 +67,29 @@ def get_stats(all, worst):
 
 def get_term_frequency(worst_queries, worst_passages):
 
+    index = 0
     for query_info in worst_queries:
         times_appear = 0
         word_least = ""
 
         queryId = query_info[0]
         query = query_info[1]
+
+        passage = worst_passages[index]
         for term in query.split(" "):
 
-            passage = worst_passages[queryId]
             if term not in passage:
                 times_appear = 0
                 word_least = term
                 break
-            number_apperances = passage.split("term")
+            number_apperances = len(passage.split(term))
 
             if number_apperances < times_appear or times_appear == 0:
                 word_least = term
                 times_appear = number_apperances
-
-        print(f"For the {queryId} the word that appears the least is {word_least} and it appears {times_appear}")
+        index += 1
+        print(
+            f"For the query {queryId} the word that appears the least is {word_least} and it appears {times_appear} times")
 
 
 # NB: postings will be null if the document is empty
@@ -108,7 +111,9 @@ for passage_info in worst_passages_read:
 
 get_stats(read_json(ALL_PASSAGES), worst_passages)
 
-get_term_frequency(worst_queries, worst_queries)
+get_term_frequency(worst_queries_read, worst_passages_read)
+
+get_term_frequency(read_json(ALL_PASSAGES), read_all_document(QUERIES_FILE))
 
 # Documents
 
