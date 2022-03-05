@@ -39,7 +39,8 @@ def get_avg_stop(queries):
     counter_tot = 0
 
     for query in queries:
-        words = query[1].split(" ")
+
+        words = query.split(" ")
         for word in words:
             if word in stop_words:
                 counter_stop += 1
@@ -60,13 +61,14 @@ def get_stats(all, worst):
     print(f"All: {avg_len}")
     print(f"Worst: {avg_len_bad}")
 
-    print("\n Average stop-words: ")
+    print("Average stop-words: ")
     print(f"All : {avg_stop}")
-    print(f"Worst : {avg_stop_bad}")
+    print(f"Worst : {avg_stop_bad}\n")
 
 
 def get_term_frequency(worst_queries, worst_passages):
 
+    stop_words = read_json("stop_words_english.json")
     index = 0
     for query_info in worst_queries:
         times_appear = 0
@@ -77,16 +79,16 @@ def get_term_frequency(worst_queries, worst_passages):
 
         passage = worst_passages[index]
         for term in query.split(" "):
+            if term not in stop_words:
+                if term not in passage:
+                    times_appear = 0
+                    word_least = term
+                    break
+                number_apperances = len(passage.split(term))
 
-            if term not in passage:
-                times_appear = 0
-                word_least = term
-                break
-            number_apperances = len(passage.split(term))
-
-            if number_apperances < times_appear or times_appear == 0:
-                word_least = term
-                times_appear = number_apperances
+                if number_apperances < times_appear or times_appear == 0:
+                    word_least = term
+                    times_appear = number_apperances
         index += 1
         print(
             f"For the query {queryId} the word that appears the least is {word_least} and it appears {times_appear} times")
@@ -100,7 +102,7 @@ worst_queries = list()
 for query_info in worst_queries_read:
     worst_queries.append(query_info[1])
 
-
+print("Stats for queries")
 get_stats(read_all_document(QUERIES_FILE), worst_queries)
 
 worst_passages_read = read_json("worst_passages.json")
@@ -108,8 +110,13 @@ worst_passages = list()
 for passage_info in worst_passages_read:
     worst_passages.append(passage_info[1])
 
+all_passages_info = list()
+for passage_info in read_json(ALL_PASSAGES):
+    all_passages_info.append(passage_info[1])
 
-get_stats(read_json(ALL_PASSAGES), worst_passages)
+
+print("Stats for passages")
+get_stats(all_passages_info, worst_passages)
 
 get_term_frequency(worst_queries_read, worst_passages_read)
 
