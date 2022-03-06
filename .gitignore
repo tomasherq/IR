@@ -3,3 +3,5 @@ collections
 createIndex/passage_index
 runs
 evals/run*
+evals/worst_queries/all
+evals/worst_queries/worst

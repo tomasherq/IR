@@ -1,5 +1,5 @@
 from sklearn.ensemble import RandomForestRegressor
-from common_mo import *
+from common import *
 import sys
 
 pipeline = pt.FeaturesBatchRetrieve(INDEX, wmodel="BM25", features=["WMODEL:Tf", "WMODEL:PL2"])
