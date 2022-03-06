@@ -17,7 +17,6 @@ def check_term_in_corpus(term):
 
 
 def spell_check(query, corpus):
-    #weirdos = ['?', '!', ',', '.', ':', ";", ']', '}', ')', '"', "'", '/', '\\', '@', '#', '$', '%']
     sp = SpellChecker()
     edited_query = query.strip().split()
 
@@ -25,10 +24,7 @@ def spell_check(query, corpus):
         if check_term_in_corpus(edited_query[word]) == 0 and len(sp.unknown([edited_query[word]])) > 0:
             if len(edited_query[word]) > 3:
                 corrected = sp.correction(edited_query[word])
-                #print(f"Corrected {edited_query[word]} to {corrected}")
                 edited_query[word] = corrected
-            else:
-                print("Unknown word below length 3: ", word)
 
     return str(edited_query[0] + "\t" + " ".join(edited_query[1:]))
 
@@ -57,8 +53,6 @@ if __name__ == '__main__':
         for line in new_topics:
             new_f.write(line+"\n")
 
-        lines = new_f.readlines()
-        print(lines)
         new_f.close()
 
     topics = pt.io.read_topics(CORRECTED_TOPICS, format="singleline")

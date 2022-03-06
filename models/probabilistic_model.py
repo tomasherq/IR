@@ -20,8 +20,8 @@ if __name__ == '__main__':
     eval_res = pt.Utils.evaluate(res, qrels, metrics=['map', "ndcg", "recip_rank"], perquery=True)
     write_eval(eval_res, OUTPUT_EVAL)
 
-    print("Runtime: ", timer()-start)
     eval_res = pt.Utils.evaluate(res, qrels, metrics=['map', "ndcg", "recip_rank"])
     write_eval(eval_res, OUTPUT_EVAL_GENERAL)
+    print("Runtime: ", timer()-start)
 
     pt.io.write_results(res, OUTPUT, format='trec', append=False)
